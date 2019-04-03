@@ -51,8 +51,10 @@ export default class Tabs extends Component {
     return <div><div className="x-tabs-header">{headers}</div>{contents}</div>;
   }
   render() {
+    let {className} = this.props;
+    let cls = typeof className ==='undefined'? "x-Tabs":className +' x-tabs';
     return (
-      <div className="x-Tabs">
+      <div className={cls}>
         {this.formatTabs()}
       </div>
     );

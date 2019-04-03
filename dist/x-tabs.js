@@ -197,7 +197,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', { className: 'x-Tabs' }, this.formatTabs());
+	      var className = this.props.className;
+
+	      var cls = typeof className === 'undefined' ? "x-Tabs" : className + ' x-tabs';
+	      return _react2.default.createElement('div', { className: cls }, this.formatTabs());
 	    }
 	  }]);
 

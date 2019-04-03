@@ -1,6 +1,6 @@
 {
   "name": "xui-tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "react xui-tabs 选项卡组件",
   "main": "./lib/index.js",
   "repository": {
