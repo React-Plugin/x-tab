@@ -1,7 +1,7 @@
 {
-  "name": "x-tabs",
-  "version": "0.0.1",
-  "description": "react x-tabs 选项卡组件",
+  "name": "xui-tabs",
+  "version": "0.0.2",
+  "description": "react xui-tabs 选项卡组件",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",

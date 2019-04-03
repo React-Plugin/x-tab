@@ -1,8 +1,8 @@
 /*
  * Created with Visual Studio Code.
- * github: https://github.com/React-Plugin/x-seed
+ * github: https://github.com/React-Plugin/x-tabs
  * User: 田想兵
- * Date: 2017-05-14
+ * Date: 2019-04-03
  * Time: 20:00:00
  * Contact: 55342775@qq.com
  */

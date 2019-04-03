@@ -1,7 +1,21 @@
-.Seed {
-  background-color: #ccc;
+.x-Tabs .x-tabs-header {
+  display: flex;
+  border-bottom: 1px solid #ccc;
 }
-.Seed a {
-  color: #aaa;
-  font-size: 12px;
+.x-Tabs .x-tabs-header .x-tabs-header-item {
+  width: auto;
+  padding: 12px 16px;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+.x-Tabs .x-tabs-header .x-tabs-header-item.active {
+  border-bottom: 1px solid #1890ff;
+  color: #1890ff;
+  cursor: default;
+}
+.x-Tabs .x-tabs-item {
+  display: none;
+}
+.x-Tabs .x-tabs-item.active {
+  display: block;
 }
