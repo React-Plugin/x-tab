@@ -199,7 +199,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function render() {
 	      var className = this.props.className;
 
-	      var cls = typeof className === 'undefined' ? "x-Tabs" : className + ' x-tabs';
+	      var cls = typeof className === 'undefined' ? "x-tabs" : className + ' x-tabs';
 	      return _react2.default.createElement('div', { className: cls }, this.formatTabs());
 	    }
 	  }]);

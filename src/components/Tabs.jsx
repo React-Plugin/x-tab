@@ -52,7 +52,7 @@ export default class Tabs extends Component {
   }
   render() {
     let {className} = this.props;
-    let cls = typeof className ==='undefined'? "x-Tabs":className +' x-tabs';
+    let cls = typeof className ==='undefined'? "x-tabs":className +' x-tabs';
     return (
       <div className={cls}>
         {this.formatTabs()}
