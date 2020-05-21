@@ -15,20 +15,20 @@ export default class Tabs extends Component {
     super(props);
     let active = props.defaultActive;
     if (typeof active === 'undefined') {
-      let {children} = this.props;
-      active = React.Children.count(children) == 1?children.key:children[0].key;
+      let { children } = this.props;
+      active = React.Children.count(children) == 1 ? children.key : children[0].key;
     }
     this.state = { active: active };
   }
-  componentWillReceiveProps(newprops){
-    if( typeof newprops.active !=='undefined' && newprops.active != this.state.active){
-      this.setState({active:newprops.active});
+  componentWillReceiveProps(newprops) {
+    if (typeof newprops.active !== 'undefined' && newprops.active != this.state.active) {
+      this.setState({ active: newprops.active });
     }
   }
-  onSelect = (key)=>{
-    if(key !=this.state.active){
-      this.setState({active:key},()=>{
-        this.props.onChange&&this.props.onChange(key);
+  onSelect = (key) => {
+    if (key != this.state.active) {
+      this.setState({ active: key }, () => {
+        this.props.onChange && this.props.onChange(key);
       });
     }
   }
@@ -36,23 +36,25 @@ export default class Tabs extends Component {
     // console.log(React.Children)
     let headers = [];
     let contents = [];
-    let {active} = this.state;
+    let { active } = this.state;
     React.Children.forEach(this.props.children, (item, k) => {
-      let { children, tab } = item.props;
-      let cls = 'x-tabs-header-item',clsCon = 'x-tabs-item';
-      let {key} = item;
-      if(active == key){
-        cls +=" active";
-        clsCon += " active";
+      if (item) {
+        let { children, tab } = item.props;
+        let cls = 'x-tabs-header-item', clsCon = 'x-tabs-item';
+        let { key } = item;
+        if (active == key) {
+          cls += " active";
+          clsCon += " active";
+        }
+        headers.push(<div className={cls} key={key} onClick={this.onSelect.bind(this, key)}>{tab}</div>);
+        contents.push(<div className={clsCon} key={key}>{React.cloneElement(item)}</div>);
       }
-      headers.push(<div className={cls} key={key} onClick={this.onSelect.bind(this,key)}>{tab}</div>);
-      contents.push(<div className={clsCon} key={key}>{React.cloneElement(item)}</div>);
     })
     return <div><div className="x-tabs-header">{headers}</div>{contents}</div>;
   }
   render() {
-    let {className} = this.props;
-    let cls = typeof className ==='undefined'? "x-tabs":className +' x-tabs';
+    let { className } = this.props;
+    let cls = typeof className === 'undefined' ? "x-tabs" : className + ' x-tabs';
     return (
       <div className={cls}>
         {this.formatTabs()}
