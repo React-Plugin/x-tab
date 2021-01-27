@@ -1,3 +1,10 @@
+<!--
+ * @Author: 田想兵
+ * @Date: 2019-04-02 16:17:45
+ * @LastEditTime: 2021-01-27 19:19:06
+ * @github: https://github.com/tianxiangbing
+ * @Contact: 55342775@qq.com
+-->
 # x-tabs
 # 安装
 ```
@@ -14,5 +21,21 @@ npm install --save xui-tabs
     <TabPane tab="选项卡二" key="2">这是选项卡2的内容</TabPane>
 </Tabs>
 ```
+# Api
+## defaultActive
+默认选中项
+## onChange
+选项卡切换事件回调,参数为选中`key`
+## className
+class样式类
+# TabPane
+每个选项卡的项
+## tab
+选项卡标题
+## key
+对应的key值
+## className
+class样式类
+
 ### 关于作者
 [https://github.com/tianxiangbing](https://github.com/tianxiangbing)

@@ -278,9 +278,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(TabPane, [{
 	        key: 'render',
 	        value: function render() {
-	            var children = this.props.children;
+	            var _props = this.props,
+	                children = _props.children,
+	                className = _props.className;
 
-	            return _react2.default.createElement('div', null, children);
+	            return _react2.default.createElement('div', { className: className }, children);
 	        }
 	    }]);
 
