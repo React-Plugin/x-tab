@@ -39,8 +39,12 @@ export default class Tabs extends Component {
     let { active } = this.state;
     React.Children.forEach(this.props.children, (item, k) => {
       if (item) {
-        let { children, tab } = item.props;
-        let cls = 'x-tabs-header-item', clsCon = 'x-tabs-item';
+        let { children, tab,className } = item.props;
+        let cls = 'x-tabs-header-item';
+        let clsCon = 'x-tabs-item';
+        if(className){
+          clsCon +=' '+className;
+        }
         let { key } = item;
         if (active == key) {
           cls += " active";

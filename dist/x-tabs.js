@@ -180,10 +180,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (item) {
 	          var _item$props = item.props,
 	              children = _item$props.children,
-	              tab = _item$props.tab;
+	              tab = _item$props.tab,
+	              className = _item$props.className;
 
-	          var cls = 'x-tabs-header-item',
-	              clsCon = 'x-tabs-item';
+	          var cls = 'x-tabs-header-item';
+	          var clsCon = 'x-tabs-item';
+	          if (className) {
+	            clsCon += ' ' + className;
+	          }
 	          var key = item.key;
 
 	          if (active == key) {
@@ -278,11 +282,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(TabPane, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props,
-	                children = _props.children,
-	                className = _props.className;
+	            var children = this.props.children;
 
-	            return _react2.default.createElement('div', { className: className }, children);
+	            return _react2.default.createElement('div', null, children);
 	        }
 	    }]);
 
