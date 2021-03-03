@@ -144,12 +144,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.onSelect = function (key) {
 	      if (key != _this.state.active) {
 	        _this.setState({ active: key }, function () {
-	          _this.props.onChange && _this.props.onChange(key);
+	          _this.props.onChange && _this.props.onChange.call(_this, key);
 	        });
 	      }
 	    };
 
-	    var active = props.defaultActive;
+	    var active = typeof props.active === 'undefined' ? props.defaultActive : props.active;;
 	    if (typeof active === 'undefined') {
 	      var children = _this.props.children;
 

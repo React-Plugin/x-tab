@@ -13,7 +13,7 @@ export default class Tabs extends Component {
   static TabPane = TabPane;
   constructor(props) {
     super(props);
-    let active = props.defaultActive;
+    let active =typeof props.active === 'undefined' ?  props.defaultActive : props.active;;
     if (typeof active === 'undefined') {
       let { children } = this.props;
       active = React.Children.count(children) == 1 ? children.key : children[0].key;
@@ -28,7 +28,7 @@ export default class Tabs extends Component {
   onSelect = (key) => {
     if (key != this.state.active) {
       this.setState({ active: key }, () => {
-        this.props.onChange && this.props.onChange(key);
+        this.props.onChange && this.props.onChange.call(this,key);
       });
     }
   }

@@ -1,7 +1,7 @@
 <!--
  * @Author: 田想兵
  * @Date: 2019-04-02 16:17:45
- * @LastEditTime: 2021-01-27 19:19:06
+ * @LastEditTime: 2021-03-03 13:47:29
  * @github: https://github.com/tianxiangbing
  * @Contact: 55342775@qq.com
 -->
@@ -12,7 +12,7 @@ npm install --save xui-tabs
 ```
 # 使用
 ```
-<Tabs defaultActive="1" onChange={this.onChange}>
+<Tabs defaultActive="1" value="1" onChange={this.onChange}>
     <TabPane tab="选项卡一" key="1">这是选项卡一的内容</TabPane>
     <TabPane tab="选项卡二" key="2">这是选项卡2的内容</TabPane>
 </Tabs>
@@ -24,6 +24,8 @@ npm install --save xui-tabs
 # Api
 ## defaultActive
 默认选中项
+## active
+选中项，优选`defaultActive`
 ## onChange
 选项卡切换事件回调,参数为选中`key`
 ## className
