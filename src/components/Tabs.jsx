@@ -51,7 +51,11 @@ export default class Tabs extends Component {
           clsCon += " active";
         }
         headers.push(<div className={cls} key={key} onClick={this.onSelect.bind(this, key)}>{tab}</div>);
-        contents.push(<div className={clsCon} key={key}>{React.cloneElement(item)}</div>);
+        if(item.props.forceRender===false && active !==key){
+
+        }else{
+          contents.push(<div className={clsCon} key={key}>{React.createElement(item.type,item.props)}</div>);
+        }
       }
     })
     return <div><div className="x-tabs-header">{headers}</div>{contents}</div>;

@@ -1,7 +1,7 @@
 /*
  * @Author: 田想兵
  * @Date: 2019-04-02 16:17:45
- * @LastEditTime: 2021-01-27 19:22:37
+ * @LastEditTime: 2021-03-19 10:33:55
  * @github: https://github.com/tianxiangbing
  * @Contact: 55342775@qq.com
  */
@@ -31,7 +31,7 @@ class App extends React.Component {
       </Tabs>
         <Tabs active={this.state.index} onChange={this.onChange} className="tabs">
           <TabPane tab="选项卡一" key="1" className="item">这是选项卡一的内容</TabPane>
-          <TabPane tab="选项卡二" key="2">这是选项卡2的内容</TabPane>
+          <TabPane forceRender={false} tab="选项卡二" key="2">这是选项卡2的内容</TabPane>
         </Tabs>
         <button onClick={this.toTab.bind(this,"1")}>切换一</button>
         <button onClick={this.toTab.bind(this,"2")}>切换二</button>

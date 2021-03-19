@@ -195,7 +195,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            clsCon += " active";
 	          }
 	          headers.push(_react2.default.createElement('div', { className: cls, key: key, onClick: _this2.onSelect.bind(_this2, key) }, tab));
-	          contents.push(_react2.default.createElement('div', { className: clsCon, key: key }, _react2.default.cloneElement(item)));
+	          if (item.props.forceRender === false && active !== key) {} else {
+	            contents.push(_react2.default.createElement('div', { className: clsCon, key: key }, _react2.default.createElement(item.type, item.props)));
+	          }
 	        }
 	      });
 	      return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'x-tabs-header' }, headers), contents);
@@ -291,6 +293,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return TabPane;
 	}(_react.Component);
 
+	TabPane.defaultProps = {
+	    forceRender: true
+	};
 	exports.default = TabPane;
 
 /***/ })

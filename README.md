@@ -1,7 +1,7 @@
 <!--
  * @Author: 田想兵
  * @Date: 2019-04-02 16:17:45
- * @LastEditTime: 2021-03-03 13:47:29
+ * @LastEditTime: 2021-03-19 10:40:56
  * @github: https://github.com/tianxiangbing
  * @Contact: 55342775@qq.com
 -->
@@ -38,6 +38,8 @@ class样式类
 对应的key值
 ## className
 class样式类
+## forceRender
+被隐藏时是否渲染 DOM 结构,默认为true
 
 ### 关于作者
 [https://github.com/tianxiangbing](https://github.com/tianxiangbing)
