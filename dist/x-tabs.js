@@ -195,7 +195,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            clsCon += " active";
 	          }
 	          headers.push(_react2.default.createElement('div', { className: cls, key: key, onClick: _this2.onSelect.bind(_this2, key) }, tab));
-	          if (item.props.forceRender === false && active !== key) {} else {
+	          if (item.props.forceRender === true || active == key) {
 	            contents.push(_react2.default.createElement('div', { className: clsCon, key: key }, _react2.default.createElement(item.type, item.props)));
 	          }
 	        }
