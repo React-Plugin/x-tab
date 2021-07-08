@@ -114,6 +114,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _TabPane2 = _interopRequireDefault(_TabPane);
 
+	var _TabTitle = __webpack_require__(4);
+
+	var _TabTitle2 = _interopRequireDefault(_TabTitle);
+
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
 	}
@@ -151,7 +155,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var _this = _possibleConstructorReturn(this, (Tabs.__proto__ || Object.getPrototypeOf(Tabs)).call(this, props));
 
-	    _initialiseProps.call(_this);
+	    _this.onSelect = function (key) {
+	      if (key != _this.state.active) {
+	        _this.setState({ active: key }, function () {
+	          _this.props.onChange && _this.props.onChange.call(_this, key);
+	        });
+	      }
+	    };
 
 	    var active = typeof props.active === 'undefined' ? props.defaultActive : props.active;;
 	    if (typeof active === 'undefined') {
@@ -210,20 +220,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	      return _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'x-tabs-header' }, headers), contents);
 	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      console.log('tab didmount.');
-	    }
-	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      console.log('will mount');
-	    }
+	    // componentDidMount() {
+	    //   console.log('tab didmount.')
+	    // }
+	    // componentWillMount() {
+	    //   console.log('will mount')
+	    // }
 	    //子tab加载事件
 
+	  }, {
+	    key: 'onLoad',
+	    value: function onLoad(props) {
+	      // console.log('onload')
+	      this.setState(function (state) {
+	        state.tabs[props.index] = props;
+	        return { tabs: state.tabs };
+	      });
+	    }
 	    //子tab移除事件
 
+	  }, {
+	    key: 'unLoad',
+	    value: function unLoad(props) {
+	      this.setState(function (state) {
+	        state.tabs.splice(props.index, 1);
+	        return { tabs: state.tabs };
+	      });
+	    }
 	  }, {
 	    key: 'renderTabsHeader',
 	    value: function renderTabsHeader() {
@@ -232,13 +255,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var _state = this.state,
 	          tabs = _state.tabs,
 	          active = _state.active;
+	      var _props = this.props,
+	          _props$headerItemStyl = _props.headerItemStyle,
+	          headerItemStyle = _props$headerItemStyl === undefined ? {} : _props$headerItemStyl,
+	          _props$headerActiveSt = _props.headerActiveStyle,
+	          headerActiveStyle = _props$headerActiveSt === undefined ? {} : _props$headerActiveSt;
 
 	      return tabs.map(function (item, index) {
 	        var cls = 'x-tabs-header-item';
+	        var style = headerItemStyle;
 	        if (active == item.value) {
 	          cls += " active";
+	          style = headerActiveStyle;
 	        }
-	        return _react2.default.createElement('div', { className: cls, key: item.value, onClick: _this3.onSelect.bind(_this3, item.value) }, item.tab);
+	        // return <div className={cls} key={item.value} onClick={this.onSelect.bind(this, item.value)}>{item.tab}</div>
+	        return _react2.default.createElement(_TabTitle2.default, { style: style, className: cls, value: item.value, key: item.value, onClick: _this3.onSelect.bind(_this3, item.value) }, item.tab);
 	      });
 	    }
 	  }, {
@@ -246,15 +277,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function render() {
 	      var _this4 = this;
 
-	      var _props = this.props,
-	          className = _props.className,
-	          children = _props.children;
+	      var _props2 = this.props,
+	          className = _props2.className,
+	          children = _props2.children,
+	          _props2$style = _props2.style,
+	          style = _props2$style === undefined ? {} : _props2$style,
+	          _props2$headerStyle = _props2.headerStyle,
+	          headerStyle = _props2$headerStyle === undefined ? {} : _props2$headerStyle;
 
 	      var cls = typeof className === 'undefined' ? "x-tabs" : className + ' x-tabs';
 	      var active = this.state.active;
 
-	      return _react2.default.createElement('div', { className: cls }, _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'x-tabs-header' }, this.renderTabsHeader()), _react2.default.Children.map(children, function (item, index) {
-	        return _react2.default.createElement(item.type, _extends({}, item.props, { active: active, value: item.key, onLoad: _this4.onLoad, index: index, onSelect: _this4.onSelect }));
+	      return _react2.default.createElement('div', { className: cls, style: style }, _react2.default.createElement('div', null, _react2.default.createElement('div', { className: 'x-tabs-header', style: headerStyle }, this.renderTabsHeader()), _react2.default.Children.map(children, function (item, index) {
+	        return _react2.default.createElement(item.type, _extends({}, item.props, { active: active, value: item.key, onLoad: _this4.onLoad.bind(_this4), unLoad: _this4.unLoad.bind(_this4), index: index, onSelect: _this4.onSelect }));
 	      })));
 	    }
 	  }]);
@@ -263,34 +298,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react.Component);
 
 	Tabs.TabPane = _TabPane2.default;
-
-	var _initialiseProps = function _initialiseProps() {
-	  var _this5 = this;
-
-	  this.onSelect = function (key) {
-	    if (key != _this5.state.active) {
-	      _this5.setState({ active: key }, function () {
-	        _this5.props.onChange && _this5.props.onChange.call(_this5, key);
-	      });
-	    }
-	  };
-
-	  this.onLoad = function (props) {
-	    console.log('onload');
-	    _this5.setState(function (state) {
-	      state.tabs[props.index] = props;
-	      return { tabs: state.tabs };
-	    });
-	  };
-
-	  this.unLoad = function (props) {
-	    _this5.setState(function (state) {
-	      state.tabs.splice(props.index, 1);
-	      return { tabs: state.tabs };
-	    });
-	  };
-	};
-
 	exports.default = Tabs;
 
 /***/ }),
@@ -365,6 +372,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.props.unLoad(this.props);
 	        }
 	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps, prevState) {
+	            if (prevProps.value !== this.props.value || prevProps.tab !== this.props.tab) {
+	                this.props.onLoad(this.props);
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _props = this.props,
@@ -374,7 +388,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                value = _props.value,
 	                active = _props.active,
 	                onSelect = _props.onSelect,
-	                forceRender = _props.forceRender;
+	                forceRender = _props.forceRender,
+	                style = _props.style;
 
 	            var cls = 'x-tabs-header-item';
 	            var clsCon = 'x-tabs-item';
@@ -389,7 +404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var contents = null;
 	            // headers.push(<div className={cls} key={value} onClick={onSelect.bind(this, value)}>{tab}</div>);
 	            if (forceRender === true || active == value) {
-	                contents = _react2.default.createElement('div', { className: clsCon, key: value }, children);
+	                contents = _react2.default.createElement('div', { className: clsCon, style: style }, children);
 	            }
 	            // return <div><div className="x-tabs-header">{headers}</div>{contents}</div>;
 	            return contents;
@@ -403,6 +418,104 @@ return /******/ (function(modules) { // webpackBootstrap
 	    forceRender: true
 	};
 	exports.default = TabPane;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	}();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { default: obj };
+	}
+
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	}
+
+	function _possibleConstructorReturn(self, call) {
+	  if (!self) {
+	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+	}
+
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	} /*
+	   * @Author: 田想兵
+	   * @Date: 2021-07-08 09:50:45
+	   * @LastEditTime: 2021-07-08 14:18:56
+	   * @github: https://github.com/tianxiangbing
+	   * @Contact: 55342775@qq.com
+	   * @Desc: 选项卡头
+	   */
+
+	var TabTitle = function (_Component) {
+	  _inherits(TabTitle, _Component);
+
+	  function TabTitle(props) {
+	    _classCallCheck(this, TabTitle);
+
+	    var _this = _possibleConstructorReturn(this, (TabTitle.__proto__ || Object.getPrototypeOf(TabTitle)).call(this, props));
+
+	    _this.dom = _react2.default.createRef();
+	    return _this;
+	  }
+
+	  _createClass(TabTitle, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      // console.log(this.dom)
+	      this.dom.current.addEventListener('click', this.props.onClick, false);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.dom.current.removeEventListener('click', this.props.onClick, false);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          className = _props.className,
+	          value = _props.value,
+	          onClick = _props.onClick,
+	          children = _props.children,
+	          _props$style = _props.style,
+	          style = _props$style === undefined ? {} : _props$style;
+
+	      return _react2.default.createElement('div', { className: className, style: style, ref: this.dom, key: value }, children);
+	    }
+	  }]);
+
+	  return TabTitle;
+	}(_react.Component);
+
+	exports.default = TabTitle;
 
 /***/ })
 /******/ ])

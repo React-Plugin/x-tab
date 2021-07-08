@@ -8,6 +8,7 @@
  */
 import React, { Component } from 'react';
 import TabPane from './TabPane';
+import TabTitle from './TabTitle';
 
 export default class Tabs extends Component {
   static TabPane = TabPane;
@@ -85,24 +86,28 @@ export default class Tabs extends Component {
   }
   renderTabsHeader() {
     let { tabs, active } = this.state;
+    let {headerItemStyle={},headerActiveStyle={}} = this.props;
     return tabs.map((item, index) => {
       let cls = 'x-tabs-header-item';
+      let style = headerItemStyle;
       if (active == item.value) {
         cls += " active";
+        style = headerActiveStyle;
       }
-      return <div className={cls} key={item.value} onClick={this.onSelect.bind(this, item.value)}>{item.tab}</div>
+      // return <div className={cls} key={item.value} onClick={this.onSelect.bind(this, item.value)}>{item.tab}</div>
+      return <TabTitle style={style} className={cls} value={item.value} key={item.value} onClick={this.onSelect.bind(this, item.value)}>{item.tab}</TabTitle>
     });
   }
   render() {
-    let { className, children } = this.props;
+    let { className, children, style = {}, headerStyle = {} } = this.props;
     let cls = typeof className === 'undefined' ? "x-tabs" : className + ' x-tabs';
     let { active } = this.state;
     return (
-      <div className={cls}>
+      <div className={cls} style={style}>
         {/* {this.formatTabs()} */}
-        <div><div className="x-tabs-header">{this.renderTabsHeader()}</div>
+        <div><div className="x-tabs-header" style={headerStyle}>{this.renderTabsHeader()}</div>
           {React.Children.map(children, (item, index) => {
-            return React.createElement(item.type, { ...item.props, active: active, value: item.key, onLoad: this.onLoad.bind(this),unLoad:this.unLoad.bind(this), index, onSelect: this.onSelect });
+            return React.createElement(item.type, { ...item.props, active: active, value: item.key, onLoad: this.onLoad.bind(this), unLoad: this.unLoad.bind(this), index, onSelect: this.onSelect });
           })}</div>
       </div>
     );
